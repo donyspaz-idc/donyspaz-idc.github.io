@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20591.4%20591.4'%3E%3Cg%20transform='translate(-4044.06%20-4.3)'%20fill='%23231F20'%3E%3Cpolygon%20points='4044.06,4.3%204044.06,398.56%204241.16,201.46%204438.3,201.46%204438.3,142.3%204635.44,142.3%204635.44,63.44%204438.3,63.44%204438.3,4.3'/%3E%3Cpolygon%20points='4044.06,595.7%204241.16,595.7%204044.06,398.56'/%3E%3Cpolygon%20points='4241.16,398.56%204438.32,595.7%204635.44,595.7%204635.44,398.56%204438.32,398.56%204339.74,300'/%3E%3C/g%3E%3C/svg%3E">
+<title>Carreras — Instituto de Diseño de Caracas</title>
+<meta name="description" content="Las 5 carreras del Instituto de Diseño de Caracas: un mismo Ciclo Básico, metodología 80/20 y un Trabajo de Grado real al final de cada una.">
+<style>
+  /* ============================================================
+     Página CARRERAS — autocontenida (sin dependencias de red).
+     Paleta PRINCIPAL del manual de marca (idc-marca/paleta):
+       amarillo IDC #FFFE00 (acento y fondo del footer),
+       negro IDC #231F20, blanco #FFFFFF. Sin colores secundarios.
+     Tipografías de marca desde ./fonts/:
+       · RNS Physis  — Displaay Type Foundry. Licencia de uso confirmada.
+       · Martian Mono — SIL Open Font License 1.1 (libre, ver
+         fonts/MartianMono-OFL.txt).
+     ============================================================ */
+  @font-face{ font-family:"RNS Physis"; src:url("fonts/RNSPhysis-Light.woff2") format("woff2"); font-weight:300; font-display:swap; }
+  @font-face{ font-family:"RNS Physis"; src:url("fonts/RNSPhysis-Medium.woff2") format("woff2"); font-weight:500; font-display:swap; }
+  @font-face{ font-family:"RNS Physis"; src:url("fonts/RNSPhysis-Bold.woff2") format("woff2"); font-weight:700; font-display:swap; }
+  @font-face{ font-family:"Martian Mono"; src:url("fonts/MartianMono-Variable.ttf") format("truetype"); font-weight:300 700; font-display:swap; }
+  :root{
+    --ink:#231F20;
+    --paper:#FFFFFF;
+    --paper-dim:#F4F4F6;
+    --accent:#FFFE00;
+    --accent-ink:#231F20;
+    /* Toda la tipografía va en el negro del manual (#231F20). Se conservan
+       estos alias por compatibilidad, pero apuntan al mismo negro. */
+    --ink-soft:var(--ink);
+    --muted:var(--ink);
+    /* Criterio único de líneas: negro sólido 2px, como el borde del footer. */
+    --line:var(--ink);
+    --rule:2px solid var(--ink);
+
+    --font-display:"RNS Physis","Helvetica Neue",Arial,sans-serif;
+    --font-body:"RNS Physis","Helvetica Neue",Arial,sans-serif;
+    --font-mono:"Martian Mono","Courier New",monospace;
+
+    --container:1180px;
+    --pad:clamp(1.25rem,4vw,3rem);
+    --space-hero:clamp(3rem,8vw,5.5rem);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; overflow-x:clip; }
+  @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
+
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--font-body); font-weight:300; font-size:16px; line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:clip; /* contiene el sangrado a viewport de la lista de carreras */
+  }
+  h1,h2,h3,h4{ font-family:var(--font-display); font-weight:700; line-height:1.08; letter-spacing:-0.01em; text-wrap:balance; margin:0; }
+  p,li{ margin:0; text-wrap:pretty; }
+  a{ color:inherit; }
+  a:visited{ color:inherit; }
+  ul{ margin:0; padding:0; list-style:none; }
+  button{ font-family:inherit; }
+  a:focus-visible,button:focus-visible,summary:focus-visible{ outline:3px solid var(--ink); outline-offset:2px; }
+
+  .container{ max-width:var(--container); margin-inline:auto; padding-inline:var(--pad); }
+  section{ padding-block:clamp(3.25rem,8vw,6.5rem); }
+  main > section + section{ border-top:var(--rule); }
+  main > section + section.flush{ border-top:none; }
+
+  .kicker{ font-family:var(--font-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--muted); }
+  .kicker::before{ content:"\25A0  "; color:var(--accent); }
+  ::selection{ background:var(--accent); color:var(--accent-ink); }
+  .pending{ font-family:var(--font-mono); font-size:0.78em; color:var(--accent-ink); background:var(--accent); padding:0.05em 0.45em; text-transform:uppercase; letter-spacing:0.04em; }
+
+  .section-head{ max-width:62ch; margin-bottom:2.5rem; display:flex; flex-direction:column; gap:0.6rem; }
+  .section-head h2{ font-size:clamp(1.9rem,4vw,3rem); }
+  .section-intro{ color:var(--ink-soft); font-size:1.05rem; line-height:1.6; max-width:62ch; }
+  .lead-line{ font-family:var(--font-display); font-weight:700; font-size:clamp(1.25rem,3vw,1.8rem); line-height:1.35; margin:1.6rem 0 1.8rem; }
+  .method-brand{ margin:0 0 1rem; font-family:var(--font-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--muted); }
+  .method-brand::before{ content:"\25A0  "; color:var(--accent); }
+  .method-brand img{ height:clamp(1.7rem,4vw,2.6rem); width:auto; display:block; }
+
+  /* Titular-manifiesto (2 en la página) — escala maximalista compartida */
+  .display-xl{ display:block; font-family:var(--font-display); font-weight:700; font-size:clamp(2.8rem,10vw,7.5rem); line-height:0.92; letter-spacing:-0.02em; max-width:16ch; }
+  h2.display-xl{ font-size:clamp(2.4rem,8vw,6rem); letter-spacing:-0.03em; }
+  /* Resaltado tipo marcador: bloque amarillo SIEMPRE de fondo, con el mismo
+     aire arriba y abajo. box-decoration-break:clone reparte el recuadro por
+     cada línea; el host recibe más interlínea para que los bloques no se pisen. */
+  /* La banda amarilla se pinta como un gradiente de alto fijo (relativo al
+     tamaño del texto), no como caja con relleno: así queda SIEMPRE de fondo,
+     con el mismo aire arriba y abajo, sin pisarse entre líneas y sin tocar
+     el interlineado del titular ni del párrafo. */
+  .lead-hl, .mark{
+    color:var(--accent-ink);
+    background-image:linear-gradient(var(--accent), var(--accent));
+    background-repeat:no-repeat;
+    -webkit-box-decoration-break:clone; box-decoration-break:clone;
+    padding:0 0.16em;
+  }
+  .lead-hl{ background-size:100% 0.56em; background-position:0 0.36em; }
+  .mark{ font-weight:700; background-size:100% 0.72em; background-position:0 0.26em; }
+  /* Un titular multilínea con .lead-hl solo necesita un pelín más de interlínea
+     que el resto para que la banda angosta no roce la línea siguiente. */
+  :is(h1,h2,h3,.display-xl):has(.lead-hl){ line-height:0.96; }
+
+  /* Barra de ventajas en movimiento (ref. bloque "Investigación" del Home). */
+  .marquee{ position:relative; margin-top:clamp(1.25rem,3vw,2rem);
+    background:var(--ink); color:var(--accent); overflow:hidden; }
+  .marquee__row{ display:flex; width:max-content; animation:marquee-move 34s linear infinite; }
+  .marquee:hover .marquee__row,
+  .marquee.is-paused .marquee__row{ animation-play-state:paused; }
+  .marquee__track{ display:flex; align-items:center; margin:0; padding:0.85rem 0; list-style:none; }
+  .marquee__track li{ display:flex; align-items:center; white-space:nowrap;
+    font-family:var(--font-mono); font-weight:600; font-size:clamp(0.78rem,1.7vw,1rem);
+    text-transform:uppercase; letter-spacing:0.03em; padding-inline:1.1rem; }
+  .marquee__track li::after{ content:"\25A0"; margin-left:2.1rem; font-size:0.7em; color:var(--accent); }
+  @keyframes marquee-move{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  .marquee__toggle{ position:absolute; top:50%; right:0.7rem; transform:translateY(-50%);
+    width:2.2rem; height:2.2rem; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    background:var(--ink); border:2px solid var(--accent); color:var(--accent); cursor:pointer; }
+  .marquee__icon{ width:4px; height:13px; background:var(--accent); box-shadow:5px 0 0 var(--accent); }
+  .marquee.is-paused .marquee__icon{ width:0; height:0; background:none; box-shadow:none;
+    border-style:solid; border-width:7px 0 7px 12px;
+    border-color:transparent transparent transparent var(--accent); }
+  @media (prefers-reduced-motion:reduce){
+    .marquee{ overflow-x:auto; }
+    .marquee__row{ animation:none; }
+    .marquee__track[aria-hidden="true"]{ display:none; }
+    .marquee__toggle{ display:none; }
+  }
+
+  /* Tira de imágenes que pasan (marquee) — ref. Home del sitio grande */
+  .ticker{ overflow:hidden; margin-top:clamp(2.5rem,6vw,4rem); }
+  .ticker__track{ display:flex; gap:0.75rem; width:max-content; animation:ticker-scroll 34s linear infinite; }
+  .ticker:hover .ticker__track{ animation-play-state:paused; }
+  .ticker .ph{ flex:0 0 clamp(160px,26vw,260px); --ratio:75%; }
+  @keyframes ticker-scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  @media (prefers-reduced-motion:reduce){ .ticker__track{ animation:none; } .ticker{ overflow-x:auto; } }
+
+  /* Placeholder de imagen rayado (mismo del mockup grande) */
+  .ph{ position:relative; width:100%; overflow:hidden; border:var(--rule);
+       background:repeating-linear-gradient(45deg,var(--paper-dim) 0 12px,var(--paper) 12px 24px);
+       display:flex; align-items:flex-end; }
+  .ph::before{ content:""; display:block; padding-top:var(--ratio,66%); }
+  .ph span{ font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.03em; text-transform:uppercase;
+            background:var(--paper); color:var(--ink); padding:0.5em 0.65em; margin:0.6rem; border:1px solid var(--ink); max-width:calc(100% - 1.2rem); }
+  .ph img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .career-item__thumbs .ph span, .ticker .ph span{ font-size:0.55rem; margin:0.3rem; padding:0.3em 0.4em; line-height:1.25; }
+
+  /* ---- Botones ---- */
+  .btn{ display:inline-block; padding:0.8em 1.4em; border:2px solid var(--ink); text-decoration:none; cursor:pointer; font-family:var(--font-mono); font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; white-space:nowrap; transition:background 120ms ease,color 120ms ease; }
+  /* IMPORTANTE: cada botón declara también su estado :visited. Sin esto,
+     la regla global `a:visited{color:inherit}` gana en cascada y el texto
+     del botón oscuro (Preinscribirme ahora) se vuelve oscuro e ilegible
+     una vez que el enlace ya fue visitado. */
+  .btn-primary,
+  .btn-primary:visited{ background:#231F20; color:#FFFFFF; border-color:#231F20; }
+  .btn-primary:hover{ background:#FFFE00; color:#231F20; border-color:#231F20; }
+  @media (forced-colors: active){
+    .btn-primary{ forced-color-adjust:none; background:ButtonText; color:ButtonFace; border-color:ButtonText; }
+  }
+  .btn-secondary,
+  .btn-secondary:visited{ background:transparent; color:var(--ink); }
+  .btn-secondary:hover{ background:var(--ink); color:var(--paper); }
+  .btn-flag,
+  .btn-flag:visited{ border:none; background:var(--accent); color:var(--accent-ink); padding:0.75em 1.4em 0.75em 1em; clip-path:polygon(0 0,100% 0,calc(100% - 11px) 50%,100% 100%,0 100%); }
+  .btn-flag:hover{ background:var(--ink); color:var(--accent); }
+
+  /* Enlace de sección con estilo de botón (ref. "Ver todas" del Home). */
+  .featured-link,
+  .featured-link:visited{ align-self:flex-start; display:inline-block; padding:0.8em 1.4em; border:var(--rule);
+    font-family:var(--font-mono); font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.04em;
+    color:var(--ink); background:transparent; text-decoration:none; white-space:nowrap;
+    transition:background 120ms ease,color 120ms ease; }
+  .featured-link:hover{ background:var(--ink); color:var(--paper); }
+
+  /* ---- Header ---- */
+  .bar{ position:sticky; top:0; z-index:20; background:var(--paper); border-bottom:var(--rule); }
+  .bar .container{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-block:1rem; }
+  .logo{ display:block; flex:0 1 auto; min-width:0; text-decoration:none; color:var(--ink); font-family:var(--font-display); font-weight:700; text-transform:uppercase; font-size:0.82rem; line-height:1.05; letter-spacing:0.02em; }
+  /* Logotipo IDC: wordmark muy apaisado (~7.7:1). Ancho definido (no 'auto',
+     que en SVG colapsa a 0 en Chromium) y alto proporcional, para que nunca
+     empuje la barra fuera del viewport en móvil. */
+  .logo img{ display:block; width:min(46vw,260px); height:auto; }
+  .bar__actions{ display:flex; align-items:center; gap:0.6rem; flex-shrink:0; }
+  @media (max-width:620px){
+    .logo img{ width:44vw; }
+    .bar .btn{ padding:0.6em 0.8em; font-size:0.62rem; }
+    .bar__actions{ gap:0.4rem; }
+  }
+  @media (max-width:460px){
+    .bar__actions .btn-flag{ display:none; }
+    .logo img{ width:48vw; }
+    .bar .btn{ padding:0.55em 0.7em; font-size:0.56rem; }
+  }
+
+  /* ---- Titular del hub ---- */
+  .carreras-lead{ margin:0 0 clamp(3rem,7vw,5.5rem); }
+
+  /* Lista de carreras — el detalle se revela al pasar el mouse (no es acordeón).
+     Las reglas (arriba de la lista y bajo cada carrera) se dibujan con
+     pseudo-elementos de 100vw para que vayan de borde a borde del viewport,
+     con el mismo grosor que el resto (var(--rule)); el texto queda al ancho
+     de la página. */
+  .career-list{ position:relative; }
+  .career-list::before,
+  .career-item::after{
+    content:""; position:absolute; left:50%; width:100vw; transform:translateX(-50vw);
+    pointer-events:none;
+  }
+  .career-list::before{ top:0; border-top:var(--rule); }
+  .career-item{
+    position:relative; display:block;
+    padding:clamp(1.1rem,3vw,2rem) 0;
+    text-decoration:none; color:var(--ink);
+    transition:transform 250ms cubic-bezier(.2,.8,.2,1);
+  }
+  .career-item::after{ bottom:0; border-bottom:var(--rule); }
+  .career-item:hover,.career-item:focus-visible{ transform:translateX(clamp(0.6rem,3.5vw,2.25rem)); }
+  .career-item__name{ display:flex; align-items:center; gap:clamp(0.55rem,1.8vw,1.05rem); }
+  .career-item__arrow{
+    flex:0 0 auto; width:clamp(1.4rem,4.5vw,2.9rem); height:clamp(1.4rem,4.5vw,2.9rem);
+    color:var(--ink); fill:currentColor;
+    transform:rotate(-90deg); transform-origin:50% 50%;
+    transition:transform 250ms cubic-bezier(.2,.8,.2,1);
+  }
+  .career-item:hover .career-item__arrow,
+  .career-item:focus-visible .career-item__arrow{ transform:rotate(0deg); }
+  .num{ font-family:var(--font-mono); font-weight:500; font-size:clamp(0.7rem,1.3vw,0.9rem); color:var(--muted); flex-shrink:0; }
+  .career-item__title{
+    font-family:var(--font-display); font-weight:500;
+    font-size:clamp(2rem,8.5vw,4.75rem); line-height:1; letter-spacing:-0.02em;
+    overflow-wrap:anywhere;
+  }
+  .career-item__reveal{
+    display:grid; grid-template-rows:0fr; opacity:0; overflow:hidden;
+    transition:grid-template-rows 260ms ease, opacity 200ms ease, padding-top 260ms ease;
+  }
+  .career-item__reveal-inner{ min-height:0; display:grid; gap:0.7rem; }
+  .career-item:hover .career-item__reveal,
+  .career-item:focus-visible .career-item__reveal{ grid-template-rows:1fr; opacity:1; padding-top:0.8rem; }
+  .career-item__thumbs{ display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem; max-width:22rem; }
+  /* Al abrir una carrera, las 3 miniaturas se "colocan" sobre la mesa: suben
+     14px y aparecen, con un escalonado de izquierda a derecha. Un solo gesto. */
+  .career-item__thumbs .ph{
+    --ratio:100%;
+    opacity:0; transform:translateY(14px);
+    transition:opacity 420ms ease, transform 480ms cubic-bezier(.2,.8,.2,1);
+  }
+  .career-item:hover .career-item__thumbs .ph,
+  .career-item:focus-visible .career-item__thumbs .ph{ opacity:1; transform:none; }
+  .career-item:hover .career-item__thumbs .ph:nth-child(2),
+  .career-item:focus-visible .career-item__thumbs .ph:nth-child(2){ transition-delay:70ms; }
+  .career-item:hover .career-item__thumbs .ph:nth-child(3),
+  .career-item:focus-visible .career-item__thumbs .ph:nth-child(3){ transition-delay:140ms; }
+  /* Al pasar el cursor sobre una miniatura, el marco (y la foto con él) crece. */
+  .career-list .career-item__thumbs .ph:hover{ transform:scale(1.18); z-index:2; transition-duration:260ms; transition-delay:0s; }
+  .career-item__hook{ display:block; margin-top:0.9rem; font-family:var(--font-display); font-weight:700; font-size:clamp(1.1rem,2.6vw,1.5rem); line-height:1.18; }
+  .career-item__meta{ display:block; margin-top:0.35rem; font-family:var(--font-mono); font-size:0.78rem; text-transform:uppercase; letter-spacing:0.03em; color:var(--ink-soft); }
+  .career-item__cue{ display:inline-block; margin-top:0.7rem; font-family:var(--font-mono); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink); text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:0.3em; }
+  .career-item__hook, .career-item__meta, .career-item__cue{
+    opacity:0; transform:translateY(8px);
+    transition:opacity 360ms ease, transform 360ms ease, text-decoration-thickness 120ms ease;
+  }
+  .career-item:hover :is(.career-item__hook,.career-item__meta,.career-item__cue),
+  .career-item:focus-visible :is(.career-item__hook,.career-item__meta,.career-item__cue){
+    opacity:1; transform:none; transition-delay:220ms;
+  }
+  .career-item:hover .career-item__cue{ text-decoration-thickness:3px; }
+  @media (hover:none), (max-width:600px){
+    .career-item__reveal{ grid-template-rows:1fr; opacity:1; padding-top:0.7rem; }
+    .career-item:hover{ transform:none; }
+    .career-item__arrow{ transform:rotate(0deg); }
+    .career-item__thumbs .ph,
+    .career-item__hook,.career-item__meta,.career-item__cue{ opacity:1; transform:none; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .career-item,.career-item__reveal,.career-item__arrow,
+    .career-item__thumbs .ph,
+    .career-item__hook,.career-item__meta,.career-item__cue{ transition:none; }
+    .career-item__thumbs .ph,
+    .career-item__hook,.career-item__meta,.career-item__cue{ opacity:1; transform:none; }
+    .career-list .career-item__thumbs .ph:hover{ transform:none; }
+  }
+
+  /* ---- Carrusel de egresados ---- */
+  .alumni__track{ display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:clamp(1.5rem,4vw,3rem); scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+  .alumni__track::-webkit-scrollbar{ display:none; }
+  .alumni__slide{ flex:0 0 100%; scroll-snap-align:start; display:grid; grid-template-columns:1fr 1fr; gap:clamp(1.5rem,4vw,3rem); align-items:start; }
+  @media (max-width:760px){ .alumni__slide{ grid-template-columns:1fr; } .alumni__media{ grid-template-columns:1fr; } }
+  .alumni__media{ display:grid; grid-template-columns:0.8fr 1.2fr; gap:0.75rem; }
+  .alumni__portrait{ --ratio:100%; }
+  .alumni__project{ --ratio:66%; }
+  .alumni__quote{ margin:0; font-family:var(--font-body); font-weight:400; font-size:clamp(1rem,1.9vw,1.2rem); line-height:1.55; max-width:46ch; }
+  .alumni__name{ margin-top:1.1rem; font-family:var(--font-mono); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted); }
+  .alumni__name strong{ color:var(--ink); font-weight:600; }
+  .alumni__nav{ display:flex; align-items:center; gap:1rem; margin-top:1.75rem; }
+  .alumni__arrow{ width:2.75rem; height:2.75rem; flex-shrink:0; border:var(--rule); background:none; color:var(--ink); font-size:1.4rem; line-height:1; cursor:pointer; font-family:var(--font-body); }
+  .alumni__arrow:hover{ background:var(--ink); color:var(--paper); }
+  .alumni__arrow:disabled{ opacity:0.3; cursor:default; }
+  .alumni__dots{ display:flex; gap:0.5rem; }
+  .alumni__dot{ width:0.6rem; height:0.6rem; border-radius:50%; border:var(--rule); background:none; padding:0; cursor:pointer; }
+  .alumni__dot[aria-current="true"]{ background:var(--ink); border-color:var(--ink); }
+
+  /* Egresados sobre fondo negro. */
+  .testimonio{ background:var(--ink); color:var(--paper); }
+  .testimonio h2,
+  .testimonio .kicker,
+  .testimonio .alumni__quote,
+  .testimonio .alumni__name,
+  .testimonio .alumni__name strong{ color:var(--paper); }
+  .testimonio .ph{ border-color:var(--paper); background:#2b2727; }
+  .testimonio .alumni__arrow{ border-color:var(--paper); color:var(--paper); }
+  .testimonio .alumni__arrow:hover{ background:var(--paper); color:var(--ink); }
+  .testimonio .alumni__dot{ border-color:var(--paper); }
+  .testimonio .alumni__dot[aria-current="true"]{ background:var(--paper); border-color:var(--paper); }
+  .testimonio .featured-link,
+  .testimonio .featured-link:visited{ color:var(--paper); border-color:var(--paper); }
+  .testimonio .featured-link:hover{ background:var(--paper); color:var(--ink); }
+
+  /* ---- Preguntas frecuentes ---- */
+  /* Reglas a viewport completo (mismo criterio que la lista de carreras). */
+  .faq-list{ position:relative; }
+  .faq-list::before,
+  details.faq-item::after{
+    content:""; position:absolute; left:50%; width:100vw; transform:translateX(-50vw);
+    pointer-events:none;
+  }
+  .faq-list::before{ top:0; border-top:var(--rule); }
+  details.faq-item{ position:relative; }
+  details.faq-item::after{ bottom:0; border-bottom:var(--rule); }
+  details.faq-item > summary{
+    list-style:none; cursor:pointer; padding:1.15rem 0; gap:1.2rem;
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-family:var(--font-mono); font-weight:600; font-size:clamp(0.82rem,1.7vw,1rem);
+    letter-spacing:0.01em;
+  }
+  details.faq-item > summary::-webkit-details-marker{ display:none; }
+  details.faq-item > summary::after{ content:"+"; font-family:var(--font-mono); font-weight:500; flex-shrink:0; }
+  details.faq-item[open] > summary::after{ content:"–"; }
+  .faq-a{ padding:0 0 1.3rem; max-width:64ch; color:var(--ink-soft); }
+  .faq-a p{ margin-bottom:0.6rem; }
+  .faq-args{ display:grid; gap:0.55rem; margin:0; }
+  .faq-args li{ padding-left:1.1rem; position:relative; }
+  .faq-args li::before{ content:"—"; position:absolute; left:0; color:var(--muted); }
+  .faq-args strong{ color:var(--ink); font-weight:600; }
+
+  /* ---- Banda de CTA final ---- */
+  /* Fondo con el patrón de puntos del manual (idc-marca/paleta/Patron.svg),
+     reproducido como mosaico CSS para no cargar el SVG de 477 KB. */
+  .cta-final{ position:relative; padding-block:clamp(4rem,10vw,7rem); background:var(--paper); }
+  /* El patrón va en un pseudo-elemento y se desvanece cerca de los bordes,
+     para que las reglas superior/inferior no se monten sobre los puntos. */
+  .cta-final::before{
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background-image:radial-gradient(var(--ink) 1.5px, transparent 1.8px);
+    background-size:15px 15px;
+    -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 2.5rem, #000 calc(100% - 2.5rem), transparent 100%);
+            mask-image:linear-gradient(to bottom, transparent 0, #000 2.5rem, #000 calc(100% - 2.5rem), transparent 100%);
+  }
+  .cta-final > .container{ position:relative; z-index:1; }
+  .cta-final__card{ background:var(--paper); border:var(--rule); padding:clamp(1.75rem,4vw,3rem); max-width:48rem; margin-inline:auto; }
+  .cta-final h2{ max-width:22ch; }
+  .cta-row{ display:flex; flex-wrap:wrap; gap:0.9rem; margin-top:1.75rem; }
+
+  /* ---- ¿Por qué estudiar en el IDC? ---- */
+  /* Bloques con la gris más clara de la paleta, para dar ritmo */
+  .faq{ background:var(--paper-dim); }
+
+  /* "Cursos cortos y diplomados" (Method): bloque en gris claro del manual
+     para que el logo negro de Method se lea bien. */
+  .method-teaser{ background:var(--paper-dim); }
+  /* El logo va en su propia columna, al lado del texto (no arriba). El ancho de
+     la imagen sigue el de su columna (proporcional a la columna de texto), en
+     vez de un alto fijo, para que ambas columnas queden a escala entre sí. */
+  .method-teaser__layout{ display:grid; grid-template-columns:1fr 1.3fr; gap:clamp(2rem,5vw,4rem); align-items:center; }
+  .method-teaser__text{ display:flex; flex-direction:column; gap:1.75rem; }
+  .method-teaser .method-brand{ margin:0; }
+  .method-teaser .method-brand::before{ content:none; }
+  .method-teaser .method-brand img{ width:100%; height:auto; }
+  @media (max-width:760px){
+    .method-teaser__layout{ grid-template-columns:1fr; }
+    .method-teaser .method-brand img{ max-width:16rem; }
+  }
+  /* Separa el bloque gris de Method del bloque gris de las FAQ. */
+  .method-teaser + .faq{ border-top:var(--rule); }
+
+  /* "Alianzas internacionales": mismo tratamiento en negro con texto blanco. */
+  .alianzas{ background:var(--ink); color:var(--paper); }
+  .alianzas h2,
+  .alianzas .kicker{ color:var(--paper); }
+  .alianzas .logo-strip .logo-mark,
+  .alianzas .logo-strip a.logo-mark,
+  .alianzas .logo-strip a.logo-mark:visited{ color:var(--paper); }
+  .alianzas .logo-strip a.logo-mark img{ filter:none; }
+  /* Los .png de aliados ya vienen en blanco; el .svg de BID es negro y hay que invertirlo. */
+  .alianzas .logo-strip a.logo-mark img[src$=".svg"]{ filter:brightness(0) invert(1); }
+
+  .stat-strip .container{ display:grid; grid-template-columns:0.8fr 1.2fr; gap:3rem; align-items:start; }
+  .stat-strip__head{ margin-bottom:1.6rem; }
+  .stat-strip__head h2{ font-size:clamp(2.3rem,6vw,4rem); line-height:1.02; }
+  @media (max-width:820px){ .stat-strip .container{ grid-template-columns:1fr; } }
+  .stat-strip .ph{ --ratio:78%; }
+  /* Slot de ILUSTRACIÓN (vertical, fondo claro, sin recorte): la ilustración
+     del totem se ve completa dentro del recuadro. */
+  .ph.ph--art{ --ratio:131.4%; background:var(--paper); border:none; align-self:start; max-width:32rem; }
+  .ph.ph--art img{ object-fit:contain; object-position:center top; }
+  .ph.ph--art > span{ display:none; }
+  @media (max-width:820px){ .ph.ph--art{ max-width:22rem; } }
+  .stat-row{ display:flex; gap:2.2rem; margin-top:1.8rem; flex-wrap:wrap; }
+  .stat{ display:flex; flex-direction:column; gap:0.3rem; }
+  .stat strong{ font-family:var(--font-display); font-size:clamp(2rem,4vw,2.6rem); font-weight:700; line-height:1; }
+  .stat span{ font-size:0.92rem; color:var(--ink-soft); max-width:24ch; }
+
+  /* ---- Footer (amarillo, con marca "La Caracas") ---- */
+  .foot{ background:var(--accent); color:var(--accent-ink); border-top:var(--rule); }
+  .foot .container{ padding-block:clamp(2.5rem,5vw,3.5rem); }
+  .foot h4{ font-family:var(--font-mono); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.8rem; }
+  .foot a{ text-decoration:none; color:var(--accent-ink); font-size:0.92rem; }
+  .foot a:hover{ text-decoration:underline; }
+  .foot ul{ display:grid; gap:0.5rem; }
+  .foot p{ font-size:0.9rem; max-width:34ch; }
+  /* Contacto + logo "LA CCS" en un mismo bloque (misma fila en desktop). */
+  .foot__main{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:2rem 3rem; }
+  .foot__contact{ flex:0 1 auto; }
+  .foot-laccs{ flex:1 1 240px; display:flex; justify-content:flex-end; }
+  .foot-laccs svg{ width:min(100%,20rem); height:auto; fill:var(--accent-ink); }
+  @media (max-width:600px){ .foot-laccs{ justify-content:flex-start; } }
+  .foot__bottom{ border-top:var(--rule); font-family:var(--font-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.03em; }
+  .foot__bottom .container{ display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; padding-block:1.1rem; }
+
+  /* ---- Alianzas internacionales (tira de logos) ---- */
+  .alianzas .container{ text-align:center; }
+  .alianzas h2{ margin:0.4rem 0 1.75rem; }
+  .logo-strip{ display:flex; flex-wrap:wrap; gap:1.5rem 2.5rem; align-items:center; justify-content:center; }
+  .logo-strip .logo-mark{ font-family:var(--font-display); font-weight:700; font-size:clamp(1.5rem,3.6vw,2.4rem); letter-spacing:0.02em; color:var(--ink-soft); text-decoration:none; }
+  .logo-strip a.logo-mark:hover{ color:var(--ink); }
+  .logo-strip a.logo-mark img{ height:clamp(3.8rem,8vw,5.8rem); width:auto; display:block; }
+  /* El SVG de BID trae mucho aire interno en su viewBox: se compensa. */
+  .alianzas .logo-strip a.logo-mark img[src$=".svg"]{ height:clamp(5rem,10.5vw,7.7rem); }
+
+  /* ---- WhatsApp flotante ---- */
+  .wa{ position:fixed; right:1rem; bottom:1rem; z-index:30; width:3.25rem; height:3.25rem; border-radius:50%; border:var(--rule); background:var(--accent); color:var(--accent-ink); display:flex; align-items:center; justify-content:center; text-decoration:none; }
+  .wa svg{ width:1.6rem; height:1.6rem; fill:currentColor; }
+  .wa:hover{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+</style>
+</head>
+<body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="ico-flecha" viewBox="0 0 1080 1080">
+      <polygon points="362.66 759.54 455.99 852.74 772.49 536.87 772.49 535.48 463.3 227.26 369.91 320.36 585.6 536.27 362.66 759.54"/>
+    </symbol>
+  </svg>
+
+  <header class="bar">
+    <div class="container">
+      <a class="logo" href="https://www.disegno.com" target="_blank" rel="noopener" aria-label="Instituto de Diseño de Caracas"><img src="img/logo-idc.svg" alt="Instituto de Diseño de Caracas" onerror="this.replaceWith(document.createRange().createContextualFragment('Instituto de Diseño<br>de Caracas'))"></a>
+      <div class="bar__actions">
+        <a class="btn btn-flag" href="https://www.disegno.com/contactanos" target="_blank" rel="noopener">Hola</a>
+        <a class="btn btn-primary" href="https://inscripciones.disegno.com/p%C3%A1gina-principal" target="_blank" rel="noopener">Pre inscribirme</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="carreras-section">
+      <div class="container">
+        <h1 class="carreras-lead"><span class="display-xl">¿Cuál es tu <span class="lead-hl">pasión</span> en el Diseño ?</span></h1>
+        <div class="career-list">
+
+          <a class="career-item" href="https://www.disegno.com/modalidades-de-estudio/diseno-grafico" target="_blank" rel="noopener">
+            <span class="career-item__name"><svg class="career-item__arrow" aria-hidden="true" focusable="false"><use href="#ico-flecha"/></svg><span class="career-item__title">Diseño Gráfico</span></span>
+            <span class="career-item__reveal"><span class="career-item__reveal-inner">
+              <span class="career-item__thumbs">
+                <span class="ph"><span>Cuadrada · carrera-grafico-1.jpg</span><img src="img/carrera-grafico-1.jpg" alt="Diseño Gráfico — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+                <span class="ph"><span>Cuadrada · carrera-grafico-2.png</span><img src="img/carrera-grafico-2.jpg" alt="Diseño Gráfico — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+                <span class="ph"><span>Cuadrada · carrera-grafico-3.jpg</span><img src="img/carrera-grafico-3.jpg" alt="Diseño Gráfico — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+              </span>
+              <span class="career-item__hook">Conceptualiza las marcas que lo cambiarán todo .</span>
+              <span class="career-item__meta">6 semestres · Presencial</span>
+              <span class="career-item__cue">Ver plan de estudios →</span>
+            </span></span>
+          </a>
+
+          <a class="career-item" href="https://www.disegno.com/modalidades-de-estudio/ilustracion" target="_blank" rel="noopener">
+            <span class="career-item__name"><svg class="career-item__arrow" aria-hidden="true" focusable="false"><use href="#ico-flecha"/></svg><span class="career-item__title">Ilustración</span></span>
+            <span class="career-item__reveal"><span class="career-item__reveal-inner">
+              <span class="career-item__thumbs">
+                <span class="ph"><span>Cuadrada · carrera-ilustracion-1.jpg</span><img src="img/carrera-ilustracion-1.jpg" alt="Ilustración — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+                <span class="ph"><span>Cuadrada · carrera-ilustracion-2.jpg</span><img src="img/carrera-ilustracion-2.jpg" alt="Ilustración — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+                <span class="ph"><span>Cuadrada · carrera-ilustracion-3.jpg</span><img src="img/carrera-ilustracion-3.jpg" alt="Ilustración — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+              </span>
+              <span class="career-item__hook">Crea los mundos que definirán esta generación .</span>
+              <span class="career-item__meta">6 semestres · Presencial</span>
+              <span class="career-item__cue">Ver plan de estudios →</span>
+            </span></span>
+          </a>
+
+          <a class="career-item" href="https://www.disegno.com/modalidades-de-estudio/diseno-industrial" target="_blank" rel="noopener">
+            <span class="career-item__name"><svg class="career-item__arrow" aria-hidden="true" focusable="false"><use href="#ico-flecha"/></svg><span class="career-item__title">Diseño Industrial</span></span>
+            <span class="career-item__reveal"><span class="career-item__reveal-inner">
+              <span class="career-item__thumbs">
+                <span class="ph"><span>Cuadrada · carrera-industrial-1.png</span><img src="img/carrera-industrial-1.jpg" alt="Diseño Industrial — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+                <span class="ph"><span>Cuadrada · carrera-industrial-2.jpg</span><img src="img/carrera-industrial-2.jpg" alt="Diseño Industrial — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+                <span class="ph"><span>Cuadrada · carrera-industrial-3.jpg</span><img src="img/carrera-industrial-3.jpg" alt="Diseño Industrial — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+              </span>
+              <span class="career-item__hook">Desarrolla los objetos que usaremos todos los días .</span>
+              <span class="career-item__meta">6 semestres · Presencial</span>
+              <span class="career-item__cue">Ver plan de estudios →</span>
+            </span></span>
+          </a>
+
+          <a class="career-item" href="https://www.disegno.com/modalidades-de-estudio/diseno-de-interiores" target="_blank" rel="noopener">
+            <span class="career-item__name"><svg class="career-item__arrow" aria-hidden="true" focusable="false"><use href="#ico-flecha"/></svg><span class="career-item__title">Diseño de Interiores</span></span>
+            <span class="career-item__reveal"><span class="career-item__reveal-inner">
+              <span class="career-item__thumbs">
+                <span class="ph"><span>Cuadrada · carrera-interiores-1.jpg</span><img src="img/carrera-interiores-1.jpg" alt="Diseño de Interiores — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+                <span class="ph"><span>Cuadrada · carrera-interiores-2.jpg</span><img src="img/carrera-interiores-2.jpg" alt="Diseño de Interiores — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+                <span class="ph"><span>Cuadrada · carrera-interiores-3.jpg</span><img src="img/carrera-interiores-3.jpg" alt="Diseño de Interiores — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+              </span>
+              <span class="career-item__hook">Transforma la forma en que vivimos .</span>
+              <span class="career-item__meta">6 semestres · Presencial</span>
+              <span class="career-item__cue">Ver plan de estudios →</span>
+            </span></span>
+          </a>
+
+          <a class="career-item" href="https://www.disegno.com/modalidades-de-estudio/diseno-de-modas" target="_blank" rel="noopener">
+            <span class="career-item__name"><svg class="career-item__arrow" aria-hidden="true" focusable="false"><use href="#ico-flecha"/></svg><span class="career-item__title">Diseño de Moda</span></span>
+            <span class="career-item__reveal"><span class="career-item__reveal-inner">
+              <span class="career-item__thumbs">
+                <span class="ph"><span>Cuadrada · carrera-moda-1.jpg</span><img src="img/carrera-moda-1.jpg" alt="Diseño de Moda — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+                <span class="ph"><span>Cuadrada · carrera-moda-2.jpg</span><img src="img/carrera-moda-2.jpg" alt="Diseño de Moda — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+                <span class="ph"><span>Cuadrada · carrera-moda-3.jpg</span><img src="img/carrera-moda-3.jpg" alt="Diseño de Moda — trabajo de estudiante" loading="lazy" onerror="this.remove()"></span>
+              </span>
+              <span class="career-item__hook">Convierte la ropa en un lenguaje .</span>
+              <span class="career-item__meta">6 semestres · Presencial</span>
+              <span class="career-item__cue">Ver plan de estudios →</span>
+            </span></span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="flush">
+      <div class="container">
+        <div class="section-head" style="max-width:none;">
+          <h2 class="display-xl">Las herramientas cambian. <span class="lead-hl">Tu criterio permanece</span> .</h2>
+          <p class="section-intro">En el IDC aprendes a observar, investigar, crear y tomar decisiones como diseñador. Desarrolla tu creatividad, convierte tus ideas en proyectos y construye una visión propia .</p>
+        </div>
+        <p class="lead-line"><span>Aprende diseño haciendo diseño .</span></p>
+      </div>
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+          <span class="ph"><span>metodo-1.jpg</span><img src="img/metodo-1.jpg" alt="" loading="lazy" onerror="this.remove()"></span>
+          <span class="ph"><span>metodo-2.jpg</span><img src="img/metodo-2.jpg" alt="" loading="lazy" onerror="this.remove()"></span>
+          <span class="ph"><span>metodo-3.jpg</span><img src="img/metodo-3.jpg" alt="" loading="lazy" onerror="this.remove()"></span>
+          <span class="ph"><span>metodo-4.jpg</span><img src="img/metodo-4.jpg" alt="" loading="lazy" onerror="this.remove()"></span>
+          <span class="ph" aria-hidden="true"><img src="img/metodo-1.jpg" alt="" loading="lazy" onerror="this.remove()"></span>
+          <span class="ph" aria-hidden="true"><img src="img/metodo-2.jpg" alt="" loading="lazy" onerror="this.remove()"></span>
+          <span class="ph" aria-hidden="true"><img src="img/metodo-3.jpg" alt="" loading="lazy" onerror="this.remove()"></span>
+          <span class="ph" aria-hidden="true"><img src="img/metodo-4.jpg" alt="" loading="lazy" onerror="this.remove()"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="stat-strip flush">
+      <div class="container">
+        <div class="ph ph--art"><span>Vertical · ilustración · porque-idc-ilustracion.png</span><img src="img/porque-idc-ilustracion.png" alt="Ilustración del tótem del Instituto de Diseño de Caracas" loading="lazy" onerror="this.remove()"></div>
+        <div>
+          <div class="section-head stat-strip__head">
+          <p class="kicker">Información para decidirte</p>
+          <h2>¿Por qué estudiar en La Caracas ?</h2>
+          </div>
+          <p class="section-intro">Con <span class="mark">43 años de trayectoria</span>, el IDC es la institución líder en formación de talento creativo en Venezuela — <span class="mark">la primera escuela formal de Ilustración del país</span>. Su modelo 80/20 y su criterio interdisciplinario permiten construir un portafolio competitivo desde etapas tempranas .</p>
+          <div class="stat-row">
+            <div class="stat"><strong>87%</strong><span>Inserción laboral de nuestros graduados, en menos de 4 meses .</span></div>
+            <div class="stat"><strong>+5.000</strong><span>Egresados formando una red de creativos .</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee" aria-label="Ventajas de estudiar en La Caracas">
+        <div class="marquee__row">
+          <ul class="marquee__track">
+            <li>Metodología 80/20</li>
+            <li>Infraestructura especializada</li>
+            <li>Conexión con el mundo real</li>
+            <li>Exposición temprana</li>
+            <li>Campus urbano y experiencia cultural</li>
+            <li>Formación integral</li>
+            <li>Profesores activos en la industria</li>
+          </ul>
+          <ul class="marquee__track" aria-hidden="true">
+            <li>Metodología 80/20</li>
+            <li>Infraestructura especializada</li>
+            <li>Conexión con el mundo real</li>
+            <li>Exposición temprana</li>
+            <li>Campus urbano y experiencia cultural</li>
+            <li>Formación integral</li>
+            <li>Profesores activos en la industria</li>
+          </ul>
+        </div>
+        <button class="marquee__toggle" type="button" aria-pressed="false" aria-label="Pausar el movimiento">
+          <span class="marquee__icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="testimonio flush">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Testimonios</p>
+          <h2>¿Qué dicen nuestros egresados ?</h2>
+        </div>
+
+        <div class="alumni" data-alumni>
+          <div class="alumni__track" data-alumni-track>
+
+            <article class="alumni__slide">
+              <div class="alumni__media">
+                <span class="ph alumni__portrait"><span>Vertical · retrato · alumni-kelly-rodriguez-retrato.jpg</span><img src="img/alumni-kelly-rodriguez-retrato.jpg" alt="Kelly Rodríguez" loading="lazy" onerror="this.remove()"></span>
+                <span class="ph alumni__project"><span>Proyecto · alumni-kelly-rodriguez-proyecto.png</span><img src="img/alumni-kelly-rodriguez-proyecto.png" alt="Proyecto de Kelly Rodríguez" loading="lazy" onerror="this.remove()"></span>
+              </div>
+              <div class="alumni__text">
+                <blockquote class="alumni__quote">El aprendizaje más valioso que me dejó el IDC fue la organización como pilar del proceso creativo. Entendí que el diseño no avanza solo desde la investigación y la inspiración, sino que es un proceso riguroso de gestión y dedicación constante. Aprender a organizar conceptos, tiempos y recursos me permitió desarrollar esa capacidad multidisciplinaria que hoy aplico .</blockquote>
+                <p class="alumni__name"><strong>Kelly Rodríguez</strong> · Diseño Gráfico</p>
+              </div>
+            </article>
+
+            <article class="alumni__slide">
+              <div class="alumni__media">
+                <span class="ph alumni__portrait"><span>Retrato · alumni-peter-dib-retrato.png</span><img src="img/alumni-peter-dib-retrato.jpg" alt="Peter Dib" loading="lazy" onerror="this.remove()"></span>
+                <span class="ph alumni__project"><span>Apaisada · proyecto · alumni-peter-dib-proyecto.jpg</span><img src="img/alumni-peter-dib-proyecto.jpg" alt="Proyecto de Peter Dib" loading="lazy" onerror="this.remove()"></span>
+              </div>
+              <div class="alumni__text">
+                <blockquote class="alumni__quote">El IDC me enseñó a pensar a través del proceso y a resolver haciendo. Fue ahí donde descubrí que el diseño industrial estaba alineado con mis habilidades naturales y entendí la importancia de la disciplina, el criterio y el trabajo colaborativo. «La Caracas» me dio una base práctica y humana del diseño que luego pude llevar a experiencias internacionales en Italia y Estados Unidos .</blockquote>
+                <p class="alumni__name"><strong>Peter Dib</strong> · Diseño Industrial</p>
+              </div>
+            </article>
+
+            <article class="alumni__slide">
+              <div class="alumni__media">
+                <span class="ph alumni__portrait"><span>Retrato · alumni-ileana-mariotto-retrato.png</span><img src="img/alumni-ileana-mariotto-retrato.jpg" alt="Ileana Mariotto" loading="lazy" onerror="this.remove()"></span>
+                <span class="ph alumni__project"><span>Apaisada · proyecto · alumni-ileana-mariotto-proyecto.jpg</span><img src="img/alumni-ileana-mariotto-proyecto.jpg" alt="Proyecto de Ileana Mariotto" loading="lazy" onerror="this.remove()"></span>
+              </div>
+              <div class="alumni__text">
+                <blockquote class="alumni__quote">Pasar por La Caracas representaba muchas cosas: era aprender también a ser uno mismo, a confiar a toda costa en nuestra intuición. Batallar nuestros proyectos, defenderlos, y luego sentir la humildad de saber crear desde la nada. Mis mejores momentos fueron en trabajo de grupo: compartir las ideas todos juntos y a veces pelearlas. La Caracas me dio la etiqueta del «sí puedo» y la certeza de ser creativa con personalidad .</blockquote>
+                <p class="alumni__name"><strong>Ileana Mariotto</strong> · Diseño Industrial</p>
+              </div>
+            </article>
+
+          </div>
+
+          <div class="alumni__nav">
+            <button class="alumni__arrow" type="button" data-alumni-prev aria-label="Testimonio anterior">‹</button>
+            <div class="alumni__dots" data-alumni-dots></div>
+            <button class="alumni__arrow" type="button" data-alumni-next aria-label="Testimonio siguiente">›</button>
+          </div>
+        </div>
+
+        <p style="margin-top:1.75rem;"><a class="featured-link" href="https://www.disegno.com/alumni" target="_blank" rel="noopener">Ver todos los Alumni →</a></p>
+      </div>
+    </section>
+
+
+    <section class="method-teaser flush">
+      <div class="container method-teaser__layout">
+        <p class="method-brand"><img src="img/logo-method.png" alt="Method" onerror="this.replaceWith(document.createTextNode('Method'))"></p>
+        <div class="method-teaser__text">
+          <div class="section-head">
+            <h2>Cursos cortos y diplomados</h2>
+            <p class="section-intro">Potencia tu visión creativa y domina nuevas habilidades del mundo del diseño. Nuestras formaciones cortas ofrecen conocimientos específicos y herramientas prácticas para impulsar tu carrera.</p>
+          </div>
+          <a class="featured-link" href="https://www.disegno.com/method/" target="_blank" rel="noopener">Explorar Method →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq flush">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Antes de inscribirte</p>
+          <h2>Preguntas frecuentes</h2>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>¿Cuáles son los requisitos para inscribirme ?</summary>
+            <div class="faq-a">
+              <p>Para inscribirte en una carrera necesitas:</p>
+              <ul class="faq-args">
+                <li>Título de Bachiller en fondo negro (con el original a la vista) .</li>
+                <li>Fotocopia de la constancia de notas de bachillerato .</li>
+                <li>Fotocopia de la cédula de identidad .</li>
+                <li>Fotocopia de la partida de nacimiento .</li>
+                <li>Una foto tipo carnet (5×5 cm, fondo blanco) .</li>
+                <li>Pago de la inscripción (monto e información por WhatsApp) .</li>
+              </ul>
+              <p>No hay prueba de admisión, entrevista ni portafolio para las carreras. El portafolio sí aplica al Programa Beca Talento .</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>¿Cuál es el nivel de dedicación que exige el instituto ?</summary>
+            <p class="faq-a">La dedicación en el IDC es intensiva, práctica y de tiempo completo en términos de esfuerzo mental y creativo. Al tratarse de una institución enfocada en la formación proyectual de alto nivel, las exigencias van mucho más allá de solo cumplir con un horario de clases, ya que requiere investigar constantemente, realizar tareas y preparar entregas de proyectos de forma continua; por ello, lo más recomendable es dedicarse exclusivamente a la carrera. Si bien algunos estudiantes estudian y trabajan al mismo tiempo, esto exige un nivel sumamente alto de planificación, organización y disciplina para no comprometer el rendimiento académico .</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Cómo puedo conseguir una beca ?</summary>
+            <p class="faq-a">El Programa Beca Talento convoca su proceso de selección a finales de septiembre, para iniciar clases en marzo. Mantente atento al llamado oficial en las redes sociales del instituto .</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Se puede pagar el semestre completo al inscribirse ?</summary>
+            <p class="faq-a">Por motivos de control administrativo, al formalizar la inscripción solo se recibe el pago de la matrícula y la primera cuota. El resto de las mensualidades se cancelan de forma sucesiva según el cronograma que se te entregará al momento de inscribirte .</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Cuál es el título que obtienen los egresados ?</summary>
+            <p class="faq-a">Al egresar recibes el título de Diseñador, el cual avala 2700 horas de formación profesional intensiva. Más allá del documento, sales con un portafolio de alto nivel que es tu verdadera carta de presentación global. Nuestros egresados se desempeñan con éxito en industrias internacionales y somos miembros activos de la WDO (World Design Organization). Este respaldo permite a nuestros graduados aplicar a másteres en instituciones de élite como el Istituto Marangoni, el IED o Elisava .</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="alianzas">
+      <div class="container">
+        <p class="kicker">Reconocimiento global</p>
+        <h2>Alianzas internacionales</h2>
+        <div class="logo-strip">
+          <a class="logo-mark" href="https://wdo.org/" target="_blank" rel="noopener" aria-label="World Design Organization"><img src="img/logo-wdo.png" alt="World Design Organization" onerror="this.replaceWith(document.createTextNode('WDO'))"></a>
+          <a class="logo-mark" href="https://www.elisava.net/" target="_blank" rel="noopener" aria-label="Elisava"><img src="img/logo-elisava.png" alt="Elisava" onerror="this.replaceWith(document.createTextNode('ELISAVA'))"></a>
+          <a class="logo-mark" href="https://www.bid-dimad.org/" target="_blank" rel="noopener" aria-label="Bienal Iberoamericana de Diseño"><img src="img/logo-bid.svg" alt="Bienal Iberoamericana de Diseño" onerror="this.replaceWith(document.createTextNode('BID'))"></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-final">
+      <div class="container">
+        <div class="cta-final__card">
+          <p class="kicker">Admisiones 2026</p>
+          <h2>Inscríbete <span class="mark">antes del 21 de septiembre</span></h2>
+          <p class="section-intro">Visítanos en nuestra Sede Principal, de lunes a viernes de 8:00 a. m. a 4:00 p. m. Las clases inician el 21 de septiembre de 2026 .</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://inscripciones.disegno.com/p%C3%A1gina-principal" target="_blank" rel="noopener">Preinscribirme ahora</a>
+            <a class="btn btn-secondary" href="https://www.disegno.com/contactanos" target="_blank" rel="noopener">Visitar el IDC</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="container foot__main">
+      <div class="foot__contact">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="https://wa.me/584126074722" target="_blank" rel="noopener">WhatsApp Admisiones</a></li>
+          <li><a href="https://www.instagram.com/caracasdisegno" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/school/caracasdisegno/" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div class="foot-laccs" aria-label="La Caracas">
+      <svg viewBox="0 0 937.4 607.88" role="img" aria-label="La Caracas">
+        <path d="M317.87,328.63c-85.03,0-154.21-69.18-154.21-154.21S232.83,20.21,317.87,20.21s154.21,69.18,154.21,154.21-69.18,154.21-154.21,154.21ZM317.87,30.04c-79.61,0-144.38,64.77-144.38,144.38s64.77,144.38,144.38,144.38,144.38-64.77,144.38-144.38S397.48,30.04,317.87,30.04Z"/>
+        <path d="M616.46,328.63c-85.03,0-154.21-69.18-154.21-154.21S531.43,20.21,616.46,20.21s154.21,69.18,154.21,154.21-69.18,154.21-154.21,154.21ZM616.46,30.04c-79.61,0-144.38,64.77-144.38,144.38s64.77,144.38,144.38,144.38,144.38-64.77,144.38-144.38S696.07,30.04,616.46,30.04Z"/>
+        <path d="M168.57,587.46c-85.03,0-154.21-69.18-154.21-154.21s69.18-154.21,154.21-154.21,154.21,69.18,154.21,154.21-69.18,154.21-154.21,154.21ZM168.57,288.87c-79.61,0-144.38,64.77-144.38,144.38s64.77,144.38,144.38,144.38,144.38-64.77,144.38-144.38-64.77-144.38-144.38-144.38Z"/>
+        <path d="M467.16,587.46c-85.03,0-154.21-69.18-154.21-154.21s69.18-154.21,154.21-154.21,154.21,69.18,154.21,154.21-69.18,154.21-154.21,154.21ZM467.16,288.87c-79.61,0-144.38,64.77-144.38,144.38s64.77,144.38,144.38,144.38,144.38-64.77,144.38-144.38-64.77-144.38-144.38-144.38Z"/>
+        <path d="M765.75,587.46c-85.03,0-154.21-69.18-154.21-154.21s69.18-154.21,154.21-154.21,154.21,69.18,154.21,154.21-69.18,154.21-154.21,154.21ZM765.75,288.87c-79.61,0-144.38,64.77-144.38,144.38s64.77,144.38,144.38,144.38,144.38-64.77,144.38-144.38-64.77-144.38-144.38-144.38Z"/>
+        <path d="M279.42,242.77V106.07h32.13v106.63h44.77v30.08h-76.9Z"/>
+        <path d="M568.27,242.77l22.21-136.7h51.95l22.21,136.7h-32.3l-14.87-107.66h-3.42l-15.89,107.66h-29.9ZM585.53,204.84v-30.08h61.52v30.08h-61.52Z"/>
+        <path d="M169.42,505.02c-15.84,0-27.6-5.87-35.29-17.6-7.69-11.73-11.53-29.79-11.53-54.17s3.93-42.58,11.79-54.26c7.86-11.68,19.88-17.52,36.06-17.52,9.11,0,16.86,1.96,23.24,5.9,6.38,3.93,11.33,9.77,14.87,17.52,3.53,7.75,5.52,17.37,5.98,28.88h-28.37c-1.48-8.2-3.48-14.18-5.98-17.94-2.51-3.76-5.75-5.64-9.74-5.64-5.47,0-9.46,3.42-11.96,10.25-2.51,6.84-3.76,17.77-3.76,32.81s1.17,25.98,3.5,32.81c2.33,6.84,6.07,10.25,11.19,10.25,3.64,0,6.66-1.74,9.06-5.21,2.39-3.47,4.38-9.03,5.98-16.66h28.37c-.68,11.05-2.82,20.34-6.41,27.85-3.59,7.52-8.49,13.19-14.7,17-6.21,3.82-13.64,5.72-22.3,5.72Z"/>
+        <path d="M468.02,505.02c-15.84,0-27.6-5.87-35.29-17.6-7.69-11.73-11.53-29.79-11.53-54.17s3.93-42.58,11.79-54.26c7.86-11.68,19.88-17.52,36.06-17.52,9.11,0,16.86,1.96,23.24,5.9,6.38,3.93,11.33,9.77,14.87,17.52,3.53,7.75,5.52,17.37,5.98,28.88h-28.37c-1.48-8.2-3.48-14.18-5.98-17.94-2.51-3.76-5.75-5.64-9.74-5.64-5.47,0-9.46,3.42-11.96,10.25-2.51,6.84-3.76,17.77-3.76,32.81s1.17,25.98,3.5,32.81c2.33,6.84,6.07,10.25,11.19,10.25,3.64,0,6.66-1.74,9.06-5.21,2.39-3.47,4.38-9.03,5.98-16.66h28.37c-.68,11.05-2.82,20.34-6.41,27.85-3.59,7.52-8.49,13.19-14.7,17-6.21,3.82-13.64,5.72-22.3,5.72Z"/>
+        <path d="M751.23,463.32c1.25,4.44,3.08,7.78,5.47,10,2.39,2.22,5.35,3.33,8.89,3.33s6.21-1.25,8.37-3.76c2.16-2.5,3.25-5.81,3.25-9.91,0-2.96-.85-5.58-2.56-7.86-1.71-2.28-3.93-3.76-6.66-4.44l-12.3-3.08c-11.05-2.85-19.39-7.83-25.03-14.95-5.64-7.12-8.46-16.38-8.46-27.77,0-9,1.76-16.72,5.3-23.15,3.53-6.44,8.57-11.42,15.12-14.95,6.55-3.53,14.32-5.3,23.33-5.3s16.75,1.79,23.24,5.38c6.49,3.59,11.53,8.74,15.12,15.46,3.59,6.72,5.5,14.81,5.72,24.27h-28.71c-1.26-5.58-3.16-9.77-5.72-12.56-2.56-2.79-5.67-4.19-9.31-4.19-3.87,0-7.01,1.25-9.4,3.76-2.39,2.51-3.59,5.81-3.59,9.91,0,3.08.85,5.78,2.56,8.12,1.71,2.34,3.93,3.84,6.66,4.53l12.3,3.08c11.16,2.85,19.54,7.81,25.12,14.87,5.58,7.07,8.37,16.23,8.37,27.51,0,8.89-1.74,16.58-5.21,23.07-3.48,6.49-8.43,11.51-14.87,15.04-6.44,3.53-14.1,5.3-22.98,5.3s-16.18-1.65-22.56-4.95c-6.38-3.3-11.39-8.09-15.04-14.35-3.65-6.26-5.7-13.73-6.15-22.39h29.73Z"/>
+      </svg>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <div class="container">
+        <span>Instituto de Diseño de Caracas, S.A. J-00256591-8</span>
+        <span>© 2026 IDC. Derechos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa" href="https://wa.me/584126074722" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.06h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.79.97-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.24-1.47-1.38-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43l-.48-.01c-.16 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+  </a>
+
+<script>
+  // Carrusel de egresados — scroll-snap + flechas + puntos, sin autoplay.
+  (function(){
+    var root = document.querySelector('[data-alumni]');
+    if (!root) return;
+    var track = root.querySelector('[data-alumni-track]');
+    var slides = track.children;
+    var dotsBox = root.querySelector('[data-alumni-dots]');
+    var prev = root.querySelector('[data-alumni-prev]');
+    var next = root.querySelector('[data-alumni-next]');
+
+    for (var i = 0; i < slides.length; i++){
+      var d = document.createElement('button');
+      d.className = 'alumni__dot';
+      d.type = 'button';
+      d.setAttribute('aria-label', 'Ir al testimonio ' + (i + 1));
+      d.dataset.i = i;
+      dotsBox.appendChild(d);
+    }
+    var dots = dotsBox.children;
+
+    function current(){ return Math.round(track.scrollLeft / track.clientWidth); }
+    function sync(){
+      var i = current();
+      for (var k = 0; k < dots.length; k++){
+        dots[k].setAttribute('aria-current', k === i ? 'true' : 'false');
+      }
+      prev.disabled = i <= 0;
+      next.disabled = i >= slides.length - 1;
+    }
+    function go(i){ track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' }); }
+
+    prev.addEventListener('click', function(){ go(current() - 1); });
+    next.addEventListener('click', function(){ go(current() + 1); });
+    dotsBox.addEventListener('click', function(e){
+      var b = e.target.closest('.alumni__dot');
+      if (b) go(+b.dataset.i);
+    });
+    var raf;
+    track.addEventListener('scroll', function(){
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(sync);
+    });
+    sync();
+  })();
+
+  // Barra de ventajas — botón de pausar / reanudar el movimiento.
+  (function(){
+    var m = document.querySelector('.marquee');
+    if (!m) return;
+    var btn = m.querySelector('.marquee__toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function(){
+      var paused = m.classList.toggle('is-paused');
+      btn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+      btn.setAttribute('aria-label', paused ? 'Reanudar el movimiento' : 'Pausar el movimiento');
+    });
+  })();
+</script>
+</body>
+</html>
